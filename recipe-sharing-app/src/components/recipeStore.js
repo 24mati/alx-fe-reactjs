@@ -1,26 +1,48 @@
-import create from 'zustand';
+import create from "zustand";
 
 const useRecipeStore = create((set) => ({
+  // Recipes
   recipes: [],
-
-  favorites: [],
-  addFavorite: (recipeId) =>
+  addRecipe: (newRecipe) =>
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  updateRecipe: (updatedRecipe) =>
     set((state) => ({
-      favorites: [...new Set([...state.favorites, recipeId])], // Prevent duplicates
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      ),
+    })),
+  deleteRecipe: (recipeId) =>
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
+    })),
+  setRecipes: (recipes) => set({ recipes }),
+
+  // Search
+  searchTerm: "",
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  filteredRecipes: [],
+  filterRecipes: () =>
+    set((state) => ({
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      ),
     })),
 
+  // Favorites
+  favorites: [],
+  addFavorite: (recipeId) =>
+    set((state) => ({ favorites: [...state.favorites, recipeId] })),
   removeFavorite: (recipeId) =>
     set((state) => ({
       favorites: state.favorites.filter((id) => id !== recipeId),
     })),
 
+  // Recommendations (Mock Example)
   recommendations: [],
   generateRecommendations: () =>
     set((state) => {
-      // Generate recommendations based on favorite recipes
       const recommended = state.recipes.filter(
-        (recipe) =>
-          state.favorites.includes(recipe.id) && Math.random() > 0.5
+        (recipe) => state.favorites.includes(recipe.id) && Math.random() > 0.5
       );
       return { recommendations: recommended };
     }),
