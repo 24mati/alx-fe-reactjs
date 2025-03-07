@@ -1,4 +1,4 @@
-import PostsComponent from './PostsComponent'; // Import the Posts component
+import PostsComponent from './PostsComponent'; // Import your component that will use React Query
 
 function App() {
   return (
