@@ -1,11 +1,25 @@
-import PostsComponent from './PostsComponent'; // Import your component that will use React Query
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useState } from 'react';
+import PostsComponent from './PostsComponent';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10 * 60 * 1000, // Cache for 10 minutes
+    },
+  },
+});
 
 function App() {
+  const [showPosts, setShowPosts] = useState(true);
+
   return (
-    <div>
-      <h1>React Query - Posts</h1>
-      <PostsComponent /> {/* Render the PostsComponent */}
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <button onClick={() => setShowPosts(!showPosts)}>
+        Toggle Posts Component
+      </button>
+      {showPosts && <PostsComponent />}
+    </QueryClientProvider>
   );
 }
 
