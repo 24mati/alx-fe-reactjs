@@ -1,10 +1,10 @@
-import PostsComponent from './PostsComponent';
+import PostsComponent from './PostsComponent'; // Import the Posts component
 
 function App() {
   return (
     <div>
       <h1>React Query - Posts</h1>
-      <PostsComponent />
+      <PostsComponent /> {/* Render the PostsComponent */}
     </div>
   );
 }

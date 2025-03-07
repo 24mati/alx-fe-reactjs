@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'; // Import React Query hooks
 
 const fetchPosts = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -12,7 +12,7 @@ export default function PostsComponent() {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
-    staleTime: 60000, // Cache data for 1 min
+    staleTime: 60000, // Cache for 1 minute
   });
 
   if (isLoading) return <p>Loading posts...</p>;
