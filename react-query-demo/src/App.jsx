@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState } from 'react';
-import PostsComponent from './PostsComponent';
+import PostsComponent from './components/PostsComponent';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,5 +22,7 @@ function App() {
     </QueryClientProvider>
   );
 }
-
+<Route path="/protected" element={<ProtectedRoute />}>
+  <Route index element={<h2>Protected Page</h2>} />
+</Route>
 export default App;
