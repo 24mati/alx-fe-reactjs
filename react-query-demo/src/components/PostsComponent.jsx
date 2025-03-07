@@ -14,7 +14,13 @@ function PostsComponent() {
     error,
     isFetching,
     refetch,
-  } = useQuery('posts', fetchPosts);
+  } = useQuery('posts', fetchPosts, {
+    // Add missing configurations (fixed typos):
+    cacheTime: 15 * 60 * 1000,     // Cache data for 15 minutes
+    staleTime: 5 * 60 * 1000,      // Data is fresh for 5 minutes
+    refetchOnWindowFocus: true,    // Auto-refetch on window focus
+    keepPreviousData: true,         // Retain old data during refetches
+  });
 
   if (isLoading) return <div>Loading posts...</div>;
   if (isError) return <div>Error: {error.message}</div>;
