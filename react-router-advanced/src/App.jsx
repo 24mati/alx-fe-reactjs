@@ -17,9 +17,11 @@ function App() {
         <Link to="/dashboard">Dashboard</Link>
       </nav>
       <Routes>
+      <Route path="/blog/:id" element={<BlogPost />} /> {/* Updated to use `/blog/:id` */}
         <Route path="/" element={<Home />} />
         <Route path="/profile/*" element={<Profile />} />
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        {/* Dynamic Route for Blog Posts */}
+       
         <Route path="/login" element={<Login />} />
         {/* Protected Route */}
         <Route path="/protected" element={<ProtectedRoute />}>
