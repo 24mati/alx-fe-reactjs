@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-
+import useAuth from '../hooks/useAuth'; // Import the useAuth hook
 // Simulate authentication check
 const isAuthenticated = () => {
   // Check if the user is authenticated (e.g., by checking localStorage, a token, or an auth context)
