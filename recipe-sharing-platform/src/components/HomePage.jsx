@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import recipeData from '../data.json';
+import { Link } from 'react-router-dom';
 
+// Replace the <a> element with:
+<Link
+  to={`/recipe/${recipe.id}`}
+  className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+>
+  View Recipe →
+</Link>
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
