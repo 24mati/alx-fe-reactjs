@@ -4,16 +4,15 @@ import { Link } from 'react-router-dom';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState('');
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = 'Title is required';
     if (!ingredients.trim()) newErrors.ingredients = 'Ingredients are required';
-    if (!instructions.trim()) newErrors.instructions = 'Instructions are required';
+    if (!steps.trim()) newErrors.steps = 'Preparation steps are required';
     
-    // Additional validation for at least 2 ingredients
     const ingredientList = ingredients.split('\n').filter(i => i.trim());
     if (ingredientList.length < 2) {
       newErrors.ingredients = 'Please provide at least 2 ingredients';
@@ -27,18 +26,16 @@ const AddRecipeForm = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    // Handle form submission (you'll need to implement this)
     const newRecipe = {
       title,
       ingredients: ingredients.split('\n').filter(i => i.trim()),
-      instructions: instructions.split('\n').filter(i => i.trim())
+      steps: steps.split('\n').filter(i => i.trim())
     };
 
-    console.log('New Recipe:', newRecipe); // Temporary log
-    // Reset form
+    console.log('New Recipe:', newRecipe);
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps('');
     setErrors({});
   };
 
@@ -87,18 +84,18 @@ const AddRecipeForm = () => {
 
         <div>
           <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Cooking Instructions (one step per line)
+            Preparation Steps (one step per line)
           </label>
           <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             rows="6"
             className={`w-full px-3 py-2 border rounded-lg ${
-              errors.instructions ? 'border-red-500' : 'border-gray-300'
+              errors.steps ? 'border-red-500' : 'border-gray-300'
             } focus:outline-none focus:ring-2 focus:ring-blue-400`}
           />
-          {errors.instructions && (
-            <p className="text-red-500 text-xs mt-1">{errors.instructions}</p>
+          {errors.steps && (
+            <p className="text-red-500 text-xs mt-1">{errors.steps}</p>
           )}
         </div>
 
