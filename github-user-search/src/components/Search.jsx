@@ -7,8 +7,10 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchUser = async () => {
+  const fetchUser = async (event) => {
+    event.preventDefault(); // Prevent page reload
     if (!username) return;
+
     setLoading(true);
     setError(null);
 
@@ -17,6 +19,7 @@ const Search = () => {
       setUserData(response.data);
     } catch (err) {
       setError("Looks like we can't find the user");
+      setUserData(null);
     }
 
     setLoading(false);
@@ -24,13 +27,15 @@ const Search = () => {
 
   return (
     <div className="search-container">
-      <input
-        type="text"
-        placeholder="Enter GitHub username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button onClick={fetchUser}>Search</button>
+      <form onSubmit={fetchUser}>
+        <input
+          type="text"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
