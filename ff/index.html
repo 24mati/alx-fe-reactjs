@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="search">
+            <button id="searchButton">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="weather-card">
+            <div class="weather-icon">
+                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="Weather Icon" id="weatherIcon">
+            </div>
+
+            <div class="temperature">
+                <h2><span id="temp">72</span>°C</h2>
+                <p id="location">Ethiopian</p>
+            </div>
+
+            <div class="weather-details">
+                <div class="detail-box">
+                    <div class="icon humidity-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <div class="detail-info">
+                        <p class="value"><span id="humidity">72</span>%</p>
+                        <p class="label">humidity</p>
+                    </div>
+                </div>
+
+                <div class="detail-box">
+                    <div class="icon wind-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/>
+                        </svg>
+                    </div>
+                    <div class="detail-info">
+                        <p class="value"><span id="windSpeed">72</span> km/h</p>
+                        <p class="label">wind speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
