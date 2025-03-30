@@ -15,11 +15,11 @@ const githubApi = axios.create({
 // Fetch single user data
 export const fetchUserData = async (username) => {
   try {
-    const response = await githubApi.get(`/users/${username}`);
+    const response = await axios.get(`https://api.github.com/users/${username}`);
     return response.data;
   } catch (error) {
     if (error.response?.status === 404) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     throw error;
   }
