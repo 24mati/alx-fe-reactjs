@@ -41,7 +41,7 @@ const Search = () => {
       {loading && <p>Loading...</p>}
       
       {/* Display the exact error message */}
-      {error && <p className="text-red-500">Looks like we can't find the user</p>}
+      {error && <p className="text-red-500">"Looks like we cant find the user"</p>}
 
       {userData && (
         <div className="border p-4 rounded">
