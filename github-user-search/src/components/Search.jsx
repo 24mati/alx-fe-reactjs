@@ -6,6 +6,7 @@ const Search = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  Array.isArray(userData) && userData.map(/* ... */)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
