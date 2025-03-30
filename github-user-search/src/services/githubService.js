@@ -1,6 +1,6 @@
 // src/services/githubService.js
 import axios from 'axios';
-
+const BASE_URL = "https://api.github.com";
 // Create Axios instance with base configuration
 const githubApi = axios.create({
   baseURL: 'https://api.github.com',
