@@ -11,10 +11,12 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    
     try {
       const response = await fetchUserData(username);
       setUserData(response);
     } catch (err) {
+      // Add the correct error message here
       setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
@@ -35,8 +37,12 @@ const Search = () => {
           Search
         </button>
       </form>
+
       {loading && <p>Loading...</p>}
+      
+      {/* Display error message */}
       {error && <p className="text-red-500">{error}</p>}
+
       {userData && (
         <div className="border p-4 rounded">
           <img
