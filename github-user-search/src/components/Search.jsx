@@ -1,49 +1,58 @@
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchUser = async (event) => {
-    event.preventDefault(); // Prevent page reload
-    if (!username) return;
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError(null);
-
     try {
-      const response = await axios.get(`https://api.github.com/users/${username}`);
-      setUserData(response.data);
+      const response = await fetchUserData(username);
+      setUserData(response);
     } catch (err) {
       setError("Looks like we can't find the user");
-      setUserData(null);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="search-container">
-      <form onSubmit={fetchUser}>
+    <div className="p-4">
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
-          placeholder="Enter GitHub username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="border p-2 mr-2"
+          placeholder="Enter GitHub username"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="bg-blue-500 text-white p-2">
+          Search
+        </button>
       </form>
-
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-
+      {error && <p className="text-red-500">{error}</p>}
       {userData && (
-        <div className="user-profile">
-          <img src={userData.avatar_url} alt="User avatar" width="100" />
-          <h2>{userData.login}</h2>
+        <div className="border p-4 rounded">
+          <img
+            src={userData.avatar_url}
+            alt="Avatar"
+            className="w-20 h-20 rounded-full mb-2"
+          />
+          <h2 className="text-xl font-bold">{userData.name || userData.login}</h2>
+          <a
+            href={userData.html_url}
+            className="text-blue-500 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Profile
+          </a>
         </div>
       )}
     </div>
